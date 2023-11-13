@@ -7,3 +7,4 @@
 *.svg
 *.html
 /node_modules
+/src/index.css
