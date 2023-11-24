@@ -1,5 +1,7 @@
 import { FC } from 'react'
 
+import { ModeToggle } from '../ui/mode-toggle'
+
 import { Logo } from './Logo'
 
 import { Button } from '@/components/ui/button'
@@ -21,6 +23,7 @@ export const Navbar: FC = () => {
         <Button variant="ghost" size="sm">
           Войти
         </Button>
+        <ModeToggle />
       </div>
     </div>
   )

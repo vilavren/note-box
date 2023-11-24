@@ -8,14 +8,24 @@ export const People: FC = () => {
           <img
             src="/people-documents.png"
             alt="Картинка человека с документами"
-            className="object-contain"
+            className="object-contain dark:hidden"
+          />
+          <img
+            src="/people-documents-dark.png"
+            alt="Картинка человека с документами"
+            className="object-contain hidden dark:block"
           />
         </div>
         <div className="relative w-[400px] h-[400px] hidden md:block">
           <img
             src="/people-reading.png"
             alt="Картинка человека с книгой"
-            className="object-contain"
+            className="object-contain dark:hidden"
+          />
+          <img
+            src="/people-reading-dark.png"
+            alt="Картинка человека с книгой"
+            className="object-contain hidden dark:block"
           />
         </div>
       </div>

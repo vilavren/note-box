@@ -8,6 +8,14 @@ export const Logo: FC = () => {
         alt="Логотип"
         width={35}
         height={35}
+        className="dark:hidden"
+      />
+      <img
+        src="/logo-dark/logo-min-dark-nobg-cropp-new.svg"
+        alt="Логотип"
+        width={35}
+        height={35}
+        className="hidden dark:block"
       />
       <p className="font-semibold whitespace-nowrap">Note Box</p>
     </div>
