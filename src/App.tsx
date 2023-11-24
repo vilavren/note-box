@@ -1,11 +1,27 @@
-import { Button } from './components/ui/button'
+import { Helmet } from 'react-helmet-async'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+
+import { InitialPage } from './pages/InitialPage'
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <InitialPage />,
+    },
+  ])
+
   return (
-    <>
-      <div className="text-red-500">Hello</div>
-      <Button>click</Button>
-    </>
+    <div>
+      <Helmet>
+        <meta
+          name="theme-color"
+          content="#202020"
+          // content={theme.palette.background.default}
+        />
+      </Helmet>
+      <RouterProvider router={router} />
+    </div>
   )
 }
 
