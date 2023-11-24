@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet-async'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import { MainLayout } from './components/layout/MainLayout'
+import { AuthProvider } from './components/providers/AuthProvider'
 import { DocumentsPage } from './pages/DocumentsPage'
 import { InitialPage } from './pages/InitialPage'
 
@@ -28,7 +29,9 @@ function App() {
       <Helmet>
         <meta name="theme-color" content="#202020" />
       </Helmet>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </>
   )
 }
