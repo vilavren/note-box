@@ -5,6 +5,7 @@ import { MainLayout } from './components/layout/MainLayout'
 import { AuthProvider } from './components/providers/AuthProvider'
 import { DocumentsPage } from './pages/DocumentsPage'
 import { InitialPage } from './pages/InitialPage'
+import { LoginPage } from './pages/LoginPage'
 
 function App() {
   const router = createBrowserRouter([
@@ -21,6 +22,16 @@ function App() {
           index: true,
         },
       ],
+    },
+    {
+      path: '/login',
+      element: <LoginPage />,
+      // children: [
+      //   {
+      //     element: <DocumentsPage />,
+      //     index: true,
+      //   },
+      // ],
     },
   ])
 
