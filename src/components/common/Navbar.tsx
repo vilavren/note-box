@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { Link } from 'react-router-dom'
 
 import { ModeToggle } from '../ui/mode-toggle'
 
@@ -21,7 +22,7 @@ export const Navbar: FC = () => {
       <Logo />
       <div className="flex w-full flex-row-reverse items-center justify-between gap-x-2 md:ml-auto md:flex-row md:justify-end">
         <Button variant="ghost" size="sm">
-          Войти
+          <Link to="/login">Войти</Link>
         </Button>
         <ModeToggle />
       </div>

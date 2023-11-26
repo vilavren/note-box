@@ -1,5 +1,6 @@
 import { ArrowRight } from 'lucide-react'
 import { FC } from 'react'
+import { Link } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
 
@@ -14,7 +15,7 @@ export const Heading: FC = () => {
         Note Box и ваша работа станет быстрее и продуктивнее.
       </h3>
       <Button>
-        Подключиться к Note Box
+        <Link to="/register">Подключиться к Note Box</Link>
         <ArrowRight className="h-4 w-4 ml-2" />
       </Button>
     </div>

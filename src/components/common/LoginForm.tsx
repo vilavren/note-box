@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { FC } from 'react'
 
+import { SocialIcons } from './SocialIcons'
+
 import { Button } from '@/components/ui/button'
 import { Icons } from '@/components/ui/icons'
 import { Input } from '@/components/ui/input'
@@ -69,18 +71,7 @@ export const LoginForm: FC = ({ className, ...props }: LoginFormProps) => {
           </span>
         </div>
       </div>
-      <Button variant="outline" type="button" disabled={isLoading}>
-        <Icons.apple className="mr-2 h-4 w-4" />
-        Apple
-      </Button>
-      <Button variant="outline" type="button" disabled={isLoading}>
-        <Icons.google className="mr-2 h-4 w-4" />
-        Google
-      </Button>
-      <Button variant="outline" type="button" disabled={isLoading}>
-        <Icons.gitHub className="mr-2 h-4 w-4" />
-        Github
-      </Button>
+      <SocialIcons />
     </div>
   )
 }
