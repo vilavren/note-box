@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
+import { AuthLayout } from './components/layout/AuthLayout'
 import { MainLayout } from './components/layout/MainLayout'
 import { AuthProvider } from './components/providers/AuthProvider'
 import { DocumentsPage } from './pages/DocumentsPage'
@@ -24,14 +25,18 @@ function App() {
       ],
     },
     {
-      path: '/login',
-      element: <LoginPage />,
-      // children: [
-      //   {
-      //     element: <DocumentsPage />,
-      //     index: true,
-      //   },
-      // ],
+      path: '/',
+      element: <AuthLayout />,
+      children: [
+        {
+          path: '/login',
+          element: <LoginPage />,
+        },
+        // {
+        //   path: '/register',
+        //   element: <RegisterPage />,
+        // },
+      ],
     },
   ])
 
