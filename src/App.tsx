@@ -7,6 +7,7 @@ import { AuthProvider } from './components/providers/AuthProvider'
 import { DocumentsPage } from './pages/DocumentsPage'
 import { InitialPage } from './pages/InitialPage'
 import { LoginPage } from './pages/LoginPage'
+import { SignupPage } from './pages/SignupPage'
 
 function App() {
   const router = createBrowserRouter([
@@ -32,10 +33,10 @@ function App() {
           path: '/login',
           element: <LoginPage />,
         },
-        // {
-        //   path: '/register',
-        //   element: <RegisterPage />,
-        // },
+        {
+          path: '/signup',
+          element: <SignupPage />,
+        },
       ],
     },
   ])

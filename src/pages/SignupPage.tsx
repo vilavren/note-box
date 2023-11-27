@@ -8,9 +8,9 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { cn } from '@/lib/utils'
 
-interface LoginPageProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface SignupPageProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export const LoginPage: FC = ({ className, ...props }: LoginPageProps) => {
+export const SignupPage: FC = ({ className, ...props }: SignupPageProps) => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
   async function onSubmit(event: React.SyntheticEvent) {
@@ -26,7 +26,7 @@ export const LoginPage: FC = ({ className, ...props }: LoginPageProps) => {
     <>
       <div className="flex flex-col space-y-2 text-center">
         <h1 className="text-2xl font-semibold tracking-tight">
-          Войти в аккаунт
+          Создать аккаунт
         </h1>
         <p className="text-sm text-muted-foreground">
           Введите ваш email и пароль

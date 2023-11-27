@@ -15,7 +15,7 @@ export const Heading: FC = () => {
         Note Box и ваша работа станет быстрее и продуктивнее.
       </h3>
       <Button>
-        <Link to="/register">Подключиться к Note Box</Link>
+        <Link to="/signup">Подключиться к Note Box</Link>
         <ArrowRight className="h-4 w-4 ml-2" />
       </Button>
     </div>
