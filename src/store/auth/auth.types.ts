@@ -9,10 +9,10 @@ export interface IAuthState {
   data?: IProfile | undefined
   status: Status
   loginErrorMessage?: string
-  registerErrorMessage?: string
+  signupErrorMessage?: string
 }
 
-export interface IRegister {
+export interface ISignup {
   username: string
   email: string
   password: string

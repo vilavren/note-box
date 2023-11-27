@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { Status } from '../../interfaces/status.enum'
 import { loadState } from '../localStorage'
 
-import { fetchLogin, fetchRegister, fetchIsAuth } from './auth.asyncActions'
+import { fetchLogin, fetchSignup, fetchIsAuth } from './auth.asyncActions'
 import { IAuthPersistentState, IAuthState } from './auth.types'
 
 const initialState: IAuthState = {
@@ -22,8 +22,8 @@ const authSlice = createSlice({
     clearLoginError: (state) => {
       state.loginErrorMessage = undefined
     },
-    clearRegisterError: (state) => {
-      state.registerErrorMessage = undefined
+    clearSignupError: (state) => {
+      state.signupErrorMessage = undefined
     },
   },
   extraReducers(builder) {
@@ -41,19 +41,19 @@ const authSlice = createSlice({
       state.loginErrorMessage = action.error.message
     })
 
-    // register
-    builder.addCase(fetchRegister.pending, (state) => {
+    // signup
+    builder.addCase(fetchSignup.pending, (state) => {
       state.status = Status.LOADING
       state.data = undefined
     })
-    builder.addCase(fetchRegister.fulfilled, (state, action) => {
+    builder.addCase(fetchSignup.fulfilled, (state, action) => {
       state.status = Status.SUCCESS
       state.data = action.payload
       state.jwt = action.payload?.token
     })
-    builder.addCase(fetchRegister.rejected, (state, action) => {
+    builder.addCase(fetchSignup.rejected, (state, action) => {
       state.status = Status.ERROR
-      state.registerErrorMessage = action.error.message
+      state.signupErrorMessage = action.error.message
     })
 
     // isAuth
