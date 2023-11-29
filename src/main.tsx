@@ -9,7 +9,7 @@ import { store } from './store/store.ts'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+  <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
     <HelmetProvider>
       <Provider store={store}>
         <App />

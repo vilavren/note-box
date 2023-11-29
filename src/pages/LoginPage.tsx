@@ -1,5 +1,7 @@
 import * as React from 'react'
 import { FC } from 'react'
+import { useForm, SubmitHandler } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
 
 import { SocialIcons } from '@/components/common/SocialIcons'
 import { Button } from '@/components/ui/button'
@@ -7,19 +9,42 @@ import { Icons } from '@/components/ui/icons'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { cn } from '@/lib/utils'
+import { fetchLogin } from '@/store/auth/auth.asyncActions'
+import { authActions } from '@/store/auth/auth.slice'
+import { ILogin } from '@/store/auth/auth.types'
+import { AppDispatch } from '@/store/store'
 
 interface LoginPageProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export const LoginPage: FC = ({ className, ...props }: LoginPageProps) => {
-  const [isLoading, setIsLoading] = React.useState<boolean>(false)
+  // const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
-  async function onSubmit(event: React.SyntheticEvent) {
-    event.preventDefault()
-    setIsLoading(true)
+  // async function onSubmit(event: React.SyntheticEvent) {
+  //   event.preventDefault()
+  //   setIsLoading(true)
 
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 3000)
+  //   setTimeout(() => {
+  //     setIsLoading(false)
+  //   }, 3000)
+  // }
+
+  const dispatch = useDispatch<AppDispatch>()
+
+  const {
+    register,
+    handleSubmit,
+    formState: { isValid, isSubmitting },
+  } = useForm<ILogin>({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+    mode: 'onChange',
+  })
+
+  const onSubmit: SubmitHandler<ILogin> = async (values) => {
+    dispatch(authActions.clearLoginError())
+    await dispatch(fetchLogin(values))
   }
 
   return (
@@ -33,7 +58,7 @@ export const LoginPage: FC = ({ className, ...props }: LoginPageProps) => {
         </p>
       </div>
       <div className={cn('grid gap-3', className)} {...props}>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid gap-2">
             <div className="grid gap-2">
               <Label className="sr-only" htmlFor="email">
@@ -46,26 +71,30 @@ export const LoginPage: FC = ({ className, ...props }: LoginPageProps) => {
                 autoCapitalize="none"
                 autoComplete="email"
                 autoCorrect="off"
-                disabled={isLoading}
+                disabled={isSubmitting}
+                {...register('email', {
+                  required: 'Укажите email',
+                })}
               />
               <Label className="sr-only" htmlFor="password">
                 Пароль
               </Label>
               <Input
-                id="email"
+                id="password"
                 placeholder="password"
-                type="email"
+                type="password"
                 autoCapitalize="none"
                 autoComplete="email"
                 autoCorrect="off"
-                disabled={isLoading}
+                disabled={isSubmitting}
+                {...register('password', { required: 'Укажите пароль' })}
               />
             </div>
-            <Button disabled={isLoading}>
-              {isLoading && (
+            <Button disabled={!isValid}>
+              {isSubmitting && (
                 <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
               )}
-              Зарегистрироваться
+              Войти
             </Button>
           </div>
         </form>

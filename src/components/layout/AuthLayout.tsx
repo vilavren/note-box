@@ -1,8 +1,16 @@
-// import { UserAuthForm } from '@/app/examples/authentication/components/user-auth-form'
 import { FC } from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { Link, Navigate, Outlet } from 'react-router-dom'
+
+import { RootState } from '@/store/store'
 
 export const AuthLayout: FC = () => {
+  const { jwt } = useSelector((state: RootState) => state.auth)
+
+  if (jwt) {
+    return <Navigate to="/documents" />
+  }
+
   return (
     <>
       <div className="container h-[600px] flex-col items-center justify-center flex sm:h-[800px]">
