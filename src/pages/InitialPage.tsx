@@ -1,11 +1,20 @@
 import { FC } from 'react'
+import { useSelector } from 'react-redux'
+import { Navigate } from 'react-router-dom'
 
 import { Footer } from '@/components/common/Footer'
 import { Heading } from '@/components/common/Heading'
 import { Navbar } from '@/components/common/Navbar'
 import { People } from '@/components/common/People'
+import { RootState } from '@/store/store'
 
 export const InitialPage: FC = () => {
+  const { jwt } = useSelector((state: RootState) => state.auth)
+
+  if (jwt) {
+    return <Navigate to="/documents" />
+  }
+
   return (
     <div className="h-full dark:bg-[#1F1F1F]">
       <Navbar />
