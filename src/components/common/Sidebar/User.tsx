@@ -1,6 +1,7 @@
 import { ChevronsLeftRight } from 'lucide-react'
-import { FC } from 'react'
-import { useSelector } from 'react-redux'
+import { FC, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 import { Avatar } from '@/components/ui/avatar'
 import {
@@ -10,10 +11,19 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { RootState } from '@/store/store'
+import { Spinner } from '@/components/ui/spinner'
+import { authActions } from '@/store/auth/auth.slice'
+import { AppDispatch, RootState } from '@/store/store'
 
 export const User: FC = () => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch<AppDispatch>()
   const { data } = useSelector((s: RootState) => s.auth)
+
+  const logout = () => {
+    dispatch(authActions.logout())
+    navigate('/')
+  }
 
   return (
     <DropdownMenu>
@@ -25,7 +35,7 @@ export const User: FC = () => {
           <div className="flex max-w-[150px] items-center gap-x-2">
             <Avatar className="h-5 w-5">{/* <AvatarImage src={} /> */}</Avatar>
             <span className="line-clamp-1 text-start font-medium">
-              {data?.username}
+              {data ? data.username : <Spinner />}
             </span>
           </div>
           <ChevronsLeftRight className="ml-2 h-4 w-4 rotate-90 text-muted-foreground" />
@@ -39,7 +49,7 @@ export const User: FC = () => {
       >
         <div className="flex flex-col space-y-4 p-2">
           <p className="text-xs font-medium leading-none text-muted-foreground">
-            {data?.email}
+            {data ? data.email : <Spinner />}
           </p>
           <div className="flex items-center gap-x-2">
             <div className="rounded-md bg-secondary p-1">
@@ -48,7 +58,9 @@ export const User: FC = () => {
               </Avatar>
             </div>
             <div className="space-y-1">
-              <p className="line-clamp-1 text-sm">{data?.fullname}</p>
+              <p className="line-clamp-1 text-sm">
+                {data ? data.fullname : <Spinner />}
+              </p>
             </div>
           </div>
         </div>
@@ -57,7 +69,7 @@ export const User: FC = () => {
           asChild
           className="w-full cursor-pointer text-muted-foreground"
         >
-          <button>Выйти из аккаунта</button>
+          <button onClick={logout}>Выйти из аккаунта</button>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

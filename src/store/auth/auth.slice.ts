@@ -35,6 +35,7 @@ const authSlice = createSlice({
     builder.addCase(fetchLogin.fulfilled, (state, action) => {
       state.status = Status.SUCCESS
       state.jwt = action.payload?.token
+      state.data = action.payload
     })
     builder.addCase(fetchLogin.rejected, (state, action) => {
       state.status = Status.ERROR
