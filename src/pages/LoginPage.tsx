@@ -17,17 +17,6 @@ import { AppDispatch } from '@/store/store'
 interface LoginPageProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export const LoginPage: FC = ({ className, ...props }: LoginPageProps) => {
-  // const [isLoading, setIsLoading] = React.useState<boolean>(false)
-
-  // async function onSubmit(event: React.SyntheticEvent) {
-  //   event.preventDefault()
-  //   setIsLoading(true)
-
-  //   setTimeout(() => {
-  //     setIsLoading(false)
-  //   }, 3000)
-  // }
-
   const dispatch = useDispatch<AppDispatch>()
 
   const {
@@ -66,7 +55,7 @@ export const LoginPage: FC = ({ className, ...props }: LoginPageProps) => {
               </Label>
               <Input
                 id="email"
-                placeholder="name@example.com"
+                placeholder="почта"
                 type="email"
                 autoCapitalize="none"
                 autoComplete="email"
@@ -81,10 +70,9 @@ export const LoginPage: FC = ({ className, ...props }: LoginPageProps) => {
               </Label>
               <Input
                 id="password"
-                placeholder="password"
+                placeholder="пароль"
                 type="password"
                 autoCapitalize="none"
-                autoComplete="email"
                 autoCorrect="off"
                 disabled={isSubmitting}
                 {...register('password', { required: 'Укажите пароль' })}

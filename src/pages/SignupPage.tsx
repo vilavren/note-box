@@ -1,5 +1,7 @@
 import * as React from 'react'
 import { FC } from 'react'
+import { useForm, SubmitHandler } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
 
 import { SocialIcons } from '@/components/common/SocialIcons'
 import { Button } from '@/components/ui/button'
@@ -7,19 +9,32 @@ import { Icons } from '@/components/ui/icons'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { cn } from '@/lib/utils'
+import { fetchSignup } from '@/store/auth/auth.asyncActions'
+import { authActions } from '@/store/auth/auth.slice'
+import { ISignup } from '@/store/auth/auth.types'
+import { AppDispatch } from '@/store/store'
 
 interface SignupPageProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export const SignupPage: FC = ({ className, ...props }: SignupPageProps) => {
-  const [isLoading, setIsLoading] = React.useState<boolean>(false)
+  const dispatch = useDispatch<AppDispatch>()
 
-  async function onSubmit(event: React.SyntheticEvent) {
-    event.preventDefault()
-    setIsLoading(true)
+  const {
+    register,
+    handleSubmit,
+    formState: { isValid, isSubmitting },
+  } = useForm<ISignup>({
+    defaultValues: {
+      username: '',
+      email: '',
+      password: '',
+    },
+    mode: 'onChange',
+  })
 
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 3000)
+  const onSubmit: SubmitHandler<ISignup> = async (values) => {
+    dispatch(authActions.clearSignupError())
+    await dispatch(fetchSignup(values))
   }
 
   return (
@@ -29,40 +44,55 @@ export const SignupPage: FC = ({ className, ...props }: SignupPageProps) => {
           Создать аккаунт
         </h1>
         <p className="text-sm text-muted-foreground">
-          Введите ваш email и пароль
+          Введите данные для регистрации
         </p>
       </div>
       <div className={cn('grid gap-3', className)} {...props}>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid gap-2">
             <div className="grid gap-2">
+              <Label className="sr-only" htmlFor="email">
+                Логин
+              </Label>
+              <Input
+                id="username"
+                placeholder="логин"
+                autoCapitalize="none"
+                autoCorrect="off"
+                disabled={isSubmitting}
+                {...register('username', {
+                  required: 'Укажите логин',
+                })}
+              />
               <Label className="sr-only" htmlFor="email">
                 Email
               </Label>
               <Input
                 id="email"
-                placeholder="name@example.com"
+                placeholder="почта"
                 type="email"
                 autoCapitalize="none"
                 autoComplete="email"
                 autoCorrect="off"
-                disabled={isLoading}
+                disabled={isSubmitting}
+                {...register('email', { required: 'Укажите почту' })}
               />
               <Label className="sr-only" htmlFor="password">
                 Пароль
               </Label>
               <Input
-                id="email"
-                placeholder="password"
-                type="email"
+                id="password"
+                placeholder="пароль"
+                type="password"
                 autoCapitalize="none"
-                autoComplete="email"
+                autoComplete="password"
                 autoCorrect="off"
-                disabled={isLoading}
+                disabled={isSubmitting}
+                {...register('password', { required: 'Минимум 5 символов' })}
               />
             </div>
-            <Button disabled={isLoading}>
-              {isLoading && (
+            <Button disabled={!isValid}>
+              {isSubmitting && (
                 <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
               )}
               Зарегистрироваться
