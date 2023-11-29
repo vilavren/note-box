@@ -2,6 +2,8 @@ import { ChevronsLeft, MenuIcon } from 'lucide-react'
 import { ElementRef, FC, useEffect, useRef, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 
+import { User } from './User'
+
 import { cn } from '@/lib/utils'
 
 export const Sidebar: FC = () => {
@@ -100,7 +102,7 @@ export const Sidebar: FC = () => {
         >
           <ChevronsLeft className="h-6 w-6" />
         </div>
-        <div>username</div>
+        <User />
         <div className="mt-4">
           <p>Документ</p>
         </div>
