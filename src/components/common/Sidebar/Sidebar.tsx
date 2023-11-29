@@ -1,7 +1,15 @@
-import { ChevronsLeft, MenuIcon } from 'lucide-react'
+import {
+  ChevronsLeft,
+  MenuIcon,
+  PlusCircle,
+  Search,
+  Settings2,
+} from 'lucide-react'
 import { ElementRef, FC, useEffect, useRef, useState } from 'react'
+import { toast } from 'sonner'
 import { useMediaQuery } from 'usehooks-ts'
 
+import { ItemSidebar } from './ItemSidebar'
 import { User } from './User'
 
 import { cn } from '@/lib/utils'
@@ -82,6 +90,10 @@ export const Sidebar: FC = () => {
     }
   }
 
+  const handleCreate = () => {
+    toast('Новая запись создана!')
+  }
+
   return (
     <>
       <aside
@@ -102,9 +114,25 @@ export const Sidebar: FC = () => {
         >
           <ChevronsLeft className="h-6 w-6" />
         </div>
-        <User />
-        <div className="mt-4">
-          <p>Документ</p>
+        <div>
+          <User />
+          <ItemSidebar
+            onClick={() => {}}
+            label="Поиск"
+            icon={Search}
+            isSearch
+          />
+          <ItemSidebar onClick={() => {}} label="Настройки" icon={Settings2} />
+          <ItemSidebar
+            onClick={handleCreate}
+            label="Создать запись"
+            icon={PlusCircle}
+          />
+        </div>
+        <div className="mt-4 flex flex-col gap-2 ">
+          <p className="pl-2">Документ 1</p>
+          <p className="pl-2">Документ 2</p>
+          <p className="pl-2">Документ 3</p>
         </div>
         <div
           onMouseDown={handleMouseDown}

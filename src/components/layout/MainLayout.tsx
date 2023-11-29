@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { useSelector } from 'react-redux'
 import { Navigate, Outlet } from 'react-router-dom'
 
-import { Sidebar } from '../common/Sidebar'
+import { Sidebar } from '../common/Sidebar/Sidebar'
 
 import { RootState } from '@/store/store'
 
