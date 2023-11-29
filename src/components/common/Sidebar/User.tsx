@@ -1,5 +1,5 @@
 import { ChevronsLeftRight } from 'lucide-react'
-import { FC, useEffect, useState } from 'react'
+import { FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -33,7 +33,9 @@ export const User: FC = () => {
           className="flex w-full items-center p-3 text-sm hover:bg-primary/5"
         >
           <div className="flex max-w-[150px] items-center gap-x-2">
-            <Avatar className="h-5 w-5">{/* <AvatarImage src={} /> */}</Avatar>
+            <Avatar className="h-5 w-5 bg-primary/20">
+              {/* <AvatarImage src={} /> */}
+            </Avatar>
             <span className="line-clamp-1 text-start font-medium">
               {data ? data.username : <Spinner />}
             </span>

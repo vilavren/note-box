@@ -130,9 +130,9 @@ export const Sidebar: FC = () => {
           />
         </div>
         <div className="mt-4 flex flex-col gap-2 ">
-          <p className="pl-2">Документ 1</p>
-          <p className="pl-2">Документ 2</p>
-          <p className="pl-2">Документ 3</p>
+          <p className="pl-4">Документ 1</p>
+          <p className="pl-4">Документ 2</p>
+          <p className="pl-4">Документ 3</p>
         </div>
         <div
           onMouseDown={handleMouseDown}
