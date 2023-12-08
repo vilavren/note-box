@@ -9,6 +9,7 @@ import { ElementRef, FC, useEffect, useRef, useState } from 'react'
 import { toast } from 'sonner'
 import { useMediaQuery } from 'usehooks-ts'
 
+import { DocumentList } from './DocumentList'
 import { ItemSidebar } from './ItemSidebar'
 import { User } from './User'
 
@@ -129,10 +130,8 @@ export const Sidebar: FC = () => {
             icon={PlusCircle}
           />
         </div>
-        <div className="mt-4 flex flex-col gap-2 ">
-          <p className="pl-4">Документ 1</p>
-          <p className="pl-4">Документ 2</p>
-          <p className="pl-4">Документ 3</p>
+        <div className="mt-4">
+          <DocumentList />
         </div>
         <div
           onMouseDown={handleMouseDown}
