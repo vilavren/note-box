@@ -1,4 +1,4 @@
-import { Status } from '../../interfaces/status.enum'
+import { EnumStatus } from '../../interfaces/status.enum'
 
 export interface IAuthPersistentState {
   jwt: string | undefined
@@ -7,7 +7,7 @@ export interface IAuthPersistentState {
 export interface IAuthState {
   jwt: string | undefined
   data?: IProfile | undefined
-  status: Status
+  status: EnumStatus
   loginErrorMessage?: string
   signupErrorMessage?: string
 }

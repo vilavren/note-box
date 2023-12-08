@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { Status } from '../../interfaces/status.enum'
+import { EnumStatus } from '../../interfaces/status.enum'
 import { loadState } from '../localStorage'
 
 import { fetchLogin, fetchSignup, fetchIsAuth } from './auth.asyncActions'
@@ -8,7 +8,7 @@ import { IAuthPersistentState, IAuthState } from './auth.types'
 
 const initialState: IAuthState = {
   jwt: loadState<IAuthPersistentState>('token')?.jwt ?? undefined,
-  status: Status.LOADING,
+  status: EnumStatus.LOADING,
 }
 
 const authSlice = createSlice({
@@ -29,45 +29,45 @@ const authSlice = createSlice({
   extraReducers(builder) {
     // login
     builder.addCase(fetchLogin.pending, (state) => {
-      state.status = Status.LOADING
+      state.status = EnumStatus.LOADING
       state.jwt = undefined
     })
     builder.addCase(fetchLogin.fulfilled, (state, action) => {
-      state.status = Status.SUCCESS
+      state.status = EnumStatus.SUCCESS
       state.jwt = action.payload?.token
       state.data = action.payload
     })
     builder.addCase(fetchLogin.rejected, (state, action) => {
-      state.status = Status.ERROR
+      state.status = EnumStatus.ERROR
       state.loginErrorMessage = action.error.message
     })
 
     // signup
     builder.addCase(fetchSignup.pending, (state) => {
-      state.status = Status.LOADING
+      state.status = EnumStatus.LOADING
       state.data = undefined
     })
     builder.addCase(fetchSignup.fulfilled, (state, action) => {
-      state.status = Status.SUCCESS
+      state.status = EnumStatus.SUCCESS
       state.data = action.payload
       state.jwt = action.payload?.token
     })
     builder.addCase(fetchSignup.rejected, (state, action) => {
-      state.status = Status.ERROR
+      state.status = EnumStatus.ERROR
       state.signupErrorMessage = action.error.message
     })
 
     // isAuth
     builder.addCase(fetchIsAuth.pending, (state) => {
-      state.status = Status.LOADING
+      state.status = EnumStatus.LOADING
       state.data = undefined
     })
     builder.addCase(fetchIsAuth.fulfilled, (state, action) => {
-      state.status = Status.SUCCESS
+      state.status = EnumStatus.SUCCESS
       state.data = action.payload
     })
     builder.addCase(fetchIsAuth.rejected, (state) => {
-      state.status = Status.ERROR
+      state.status = EnumStatus.ERROR
       state.data = undefined
     })
   },

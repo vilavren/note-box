@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { Spinner } from '../ui/spinner'
 
-import { Status } from '@/interfaces/status.enum'
+import { EnumStatus } from '@/interfaces/status.enum'
 import { fetchIsAuth } from '@/store/auth/auth.asyncActions'
 import { AppDispatch, RootState } from '@/store/store'
 
@@ -16,7 +16,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
     dispatch(fetchIsAuth())
   }, [])
 
-  if (status === Status.LOADING) {
+  if (status === EnumStatus.LOADING) {
     return (
       <div className="flex h-full items-center justify-center">
         <Spinner size="lg" />

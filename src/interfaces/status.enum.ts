@@ -1,4 +1,4 @@
-export enum Status {
+export enum EnumStatus {
   LOADING = 'loading',
   SUCCESS = 'success',
   ERROR = 'error',
