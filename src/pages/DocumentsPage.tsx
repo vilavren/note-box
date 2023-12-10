@@ -1,12 +1,16 @@
 import { PlusCircle } from 'lucide-react'
 import { FC } from 'react'
-import { toast } from 'sonner'
+import { useDispatch } from 'react-redux'
 
 import { Button } from '@/components/ui/button'
+import { fetchCreateDocuments } from '@/store/documents/documetns.asyncActions'
+import { AppDispatch } from '@/store/store'
 
 export const DocumentsPage: FC = () => {
+  const dispatch = useDispatch<AppDispatch>()
+
   const handleCreate = () => {
-    toast('Новая запись создана!')
+    dispatch(fetchCreateDocuments())
   }
 
   return (
@@ -28,7 +32,7 @@ export const DocumentsPage: FC = () => {
       <h2 className="text-lg font-medium">Добро пожаловать в Note Box</h2>
       <Button onClick={handleCreate}>
         <PlusCircle className="mr-2 h-4 w-4" />
-        Создать запись
+        Создать документ
       </Button>
     </div>
   )

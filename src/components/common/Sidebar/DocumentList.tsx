@@ -17,12 +17,14 @@ interface DocumentsListProps {
 export const DocumentList = ({ level = 0 }: DocumentsListProps) => {
   const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate()
-  const { documents } = useSelector((s: RootState) => s.documents)
+  const { activeDocument, documents } = useSelector(
+    (s: RootState) => s.documents
+  )
   const { documentId } = useParams()
 
   useEffect(() => {
     dispatch(fetchGetAllDocuments())
-  }, [])
+  }, [activeDocument.item])
 
   const onRedirect = (documentId: string) => {
     navigate(`/documents/${documentId}`)

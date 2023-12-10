@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { toast } from 'sonner'
 
 import { IDocument, IDocumentsState } from './documents.types'
 import {
@@ -21,16 +22,19 @@ const documentsSlice = createSlice({
     // fetchCreateDocuments
     builder.addCase(fetchCreateDocuments.pending, (state) => {
       state.activeDocument.status = EnumStatus.LOADING
+      toast.loading('Создание нового документа...')
     })
     builder.addCase(
       fetchCreateDocuments.fulfilled,
       (state, action: PayloadAction<IDocument>) => {
         state.activeDocument.status = EnumStatus.LOADING
         state.activeDocument.item = action.payload
+        toast.success('Новый документ создан!')
       }
     )
     builder.addCase(fetchCreateDocuments.rejected, (state) => {
       state.activeDocument.status = EnumStatus.ERROR
+      toast.error('Ошибка при создании нового документа.')
     })
 
     // fetchGetAllDocuments

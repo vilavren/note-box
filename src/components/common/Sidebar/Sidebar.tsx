@@ -6,7 +6,7 @@ import {
   Settings2,
 } from 'lucide-react'
 import { ElementRef, FC, useEffect, useRef, useState } from 'react'
-import { toast } from 'sonner'
+import { useDispatch } from 'react-redux'
 import { useMediaQuery } from 'usehooks-ts'
 
 import { DocumentList } from './DocumentList'
@@ -14,8 +14,12 @@ import { ItemSidebar } from './ItemSidebar'
 import { User } from './User'
 
 import { cn } from '@/lib/utils'
+import { fetchCreateDocuments } from '@/store/documents/documetns.asyncActions'
+import { AppDispatch } from '@/store/store'
 
 export const Sidebar: FC = () => {
+  const dispatch = useDispatch<AppDispatch>()
+
   const isMobile = useMediaQuery('(max-width: 768px)')
 
   const isResizingRef = useRef(false)
@@ -92,7 +96,7 @@ export const Sidebar: FC = () => {
   }
 
   const handleCreate = () => {
-    toast('Новая запись создана!')
+    dispatch(fetchCreateDocuments())
   }
 
   return (
@@ -126,7 +130,7 @@ export const Sidebar: FC = () => {
           <ItemSidebar onClick={() => {}} label="Настройки" icon={Settings2} />
           <ItemSidebar
             onClick={handleCreate}
-            label="Создать запись"
+            label="Создать документ"
             icon={PlusCircle}
           />
         </div>
