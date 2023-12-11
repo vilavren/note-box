@@ -1,4 +1,4 @@
-import { ChevronDown, ChevronRight, LucideIcon } from 'lucide-react'
+import { ChevronDown, ChevronRight, LucideIcon, Plus } from 'lucide-react'
 
 import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
@@ -48,7 +48,7 @@ export const ItemSidebar = ({
         <div
           role="button"
           onClick={handleExpand}
-          className="mr-1 h-full rounded-sm hover:bg-neutral-300 dark:bg-neutral-600"
+          className="h-full rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600 mr-1"
         >
           <ChevronIcon className="h-4 w-4 shrink-0 text-muted-foreground/50" />
         </div>
@@ -65,6 +65,15 @@ export const ItemSidebar = ({
         <kbd className="pointer-events-none ml-auto inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-xs font-medium text-muted-foreground opacity-100">
           <span className="text-sm">⌘</span>K
         </kbd>
+      )}
+      {id && (
+        <div
+          role="button"
+          onClick={() => {}}
+          className="opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600"
+        >
+          <Plus className="h-4 w-4 text-muted-foreground" />
+        </div>
       )}
     </div>
   )

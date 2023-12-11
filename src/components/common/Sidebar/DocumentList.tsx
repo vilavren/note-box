@@ -31,7 +31,7 @@ export const DocumentList = ({ level = 0 }: DocumentsListProps) => {
     navigate(`/documents/${documentId}`)
   }
 
-  if (documents.status === EnumStatus.LOADING)
+  if (documents.items.length === 0 && documents.status === EnumStatus.LOADING)
     return (
       <div className="flex gap-2 flex-col">
         <ItemSidebar.Skeleton level={level} />
@@ -44,7 +44,6 @@ export const DocumentList = ({ level = 0 }: DocumentsListProps) => {
         )}
       </div>
     )
-  console.log(documents.status)
 
   return (
     <>
