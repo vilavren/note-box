@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 import { ItemSidebar } from './ItemSidebar'
 
+import { EnumStatus } from '@/interfaces/status.enum'
 import { cn } from '@/lib/utils'
 import { fetchGetAllDocuments } from '@/store/documents/documetns.asyncActions'
 import { AppDispatch, RootState } from '@/store/store'
@@ -30,7 +31,7 @@ export const DocumentList = ({ level = 0 }: DocumentsListProps) => {
     navigate(`/documents/${documentId}`)
   }
 
-  if (documents.items.length === 0)
+  if (documents.status === EnumStatus.LOADING)
     return (
       <div className="flex gap-2 flex-col">
         <ItemSidebar.Skeleton level={level} />
@@ -43,6 +44,7 @@ export const DocumentList = ({ level = 0 }: DocumentsListProps) => {
         )}
       </div>
     )
+  console.log(documents.status)
 
   return (
     <>

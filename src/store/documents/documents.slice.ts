@@ -27,7 +27,7 @@ const documentsSlice = createSlice({
     builder.addCase(
       fetchCreateDocuments.fulfilled,
       (state, action: PayloadAction<IDocument>) => {
-        state.activeDocument.status = EnumStatus.LOADING
+        state.activeDocument.status = EnumStatus.SUCCESS
         state.activeDocument.item = action.payload
         toast.success('Новый документ создан!')
       }
@@ -44,12 +44,12 @@ const documentsSlice = createSlice({
     builder.addCase(
       fetchGetAllDocuments.fulfilled,
       (state, action: PayloadAction<IDocument[]>) => {
-        state.documents.status = EnumStatus.LOADING
+        state.documents.status = EnumStatus.SUCCESS
         state.documents.items = action.payload
       }
     )
     builder.addCase(fetchGetAllDocuments.rejected, (state) => {
-      state.documents.status = EnumStatus.LOADING
+      state.documents.status = EnumStatus.ERROR
     })
   },
 })
